@@ -1,0 +1,125 @@
+{\rtf1\ansi\deff0\nouicompat{\fonttbl{\f0\fnil\fcharset0 Arial;}{\f1\fnil\fcharset0 Courier;}}
+{\colortbl ;\red192\green192\blue192;}
+{\*\generator Riched20 10.0.19041}\viewkind4\uc1 
+\pard\i\fs22\lang1033 Note\i0 : \i all of the information below I'm either presenting from having learned it in Promineo Tech's course materials for the current week, or simply from my experiences writing similarly structured loops in Javascript. There is one example I borrowed from my course instructor, which I identify as such when using it.\b\i0\par
+\par
+1. What are the different loops Java provides us with?\par
+\par
+\tab\b0 A. The "for loop"\par
+\tab B. The "while loop"\par
+\tab C. The "do... while" loop\b\par
+\par
+2. What is the syntax of one of the loops in your above answer? How and when should you use this loop? Give an example.\par
+\par
+
+\pard\li720\ri720\b0 The "for loop" takes the following syntax:\par
+\par
+\highlight1\f1 for (index declaration; test expression; index iteration) \{\tab\tab\tab\tab\tab\tab\tab\tab\tab\tab\tab\par
+\tab ...some code;\tab\tab\tab\tab\tab\tab\tab\par
+\tab\tab\tab\tab\tab\tab\tab\tab\tab\tab\tab\tab\tab\tab\tab\tab\tab\tab\tab\tab\par
+\}\tab\tab\f0\tab\tab\tab\tab\tab\tab\tab\tab\par
+\par
+\highlight0 ...where the index declaration is usually initialized to an int, the test expression involves the declared index variable being greater than or less than some number or stored value (meaning the code in the loop will execute as long as that test expression remains true), and the index iteration uses an assignment operator or assignment operator shorthand, usually to increment/decrement the value of the index variable. In practice, a "for loop" usually looks like this:\par
+\par
+
+\pard\li720\ri720\highlight1\f1 for (int i = 0; i <= someNumber; i++)\{\tab\tab\tab\tab\par
+\tab\tab\tab\tab\tab\tab\tab\tab\tab\tab\par
+\tab System.out.println("Iteration number " + i);\tab\tab\tab\tab\tab\tab\tab\tab\tab\tab\tab\tab\par
+
+\pard\li720\ri720\}\tab\tab\tab\tab\tab\tab\tab\tab\tab\tab\par
+
+\pard\par
+
+\pard\li720\ri720\highlight0\f0 Notice how I made the test expression use another stored value, "someNumber", presumably declared elsewhere before the code above. "For loops" are useful in situations where the total number of iterations is unknown to the programmer, or will likely be different between executions of the code, and can be stored in a variable whose value is assigned from some user input or other external data. An example given by my instructor Chuck Kefrieter during our last class was the size of a user's shopping cart: if we're using a for loop to add up the total cost of all items in a shopping cart, we would presumably set the test expression part of the for loop syntax to execute the code up until it has gone through the total number of items in the shopping cart, which is a value that is likely to change from execution to execution.\b\par
+
+\pard\par
+3. What is the syntax of another one of the loops in your above answer? How and when should you use this loop? Give an example.\par
+\par
+
+\pard\li720\ri720\b0 The "while loop" takes the following syntax:\par
+\par
+
+\pard\li720\ri720\highlight1\f1 while (test expression) \{\tab\tab\tab\tab\tab\tab\tab\tab\tab\tab\tab\tab\tab\tab\tab\tab\par
+\tab ...some code;\tab\tab\tab\tab\tab\tab\tab\par
+\tab [some sort of variable reassignment];\tab\tab\tab\tab\tab\tab\tab\tab\tab\tab\tab\tab\tab\par
+\}\tab\tab\f0\tab\tab\tab\tab\tab\tab\tab\tab\par
+
+\pard\li720\ri720\highlight0\b\par
+\b0 ...where the code block after the while statement will continually execute as long as the test expression remains true. The test expression \i may \i0 test an iterator variable that will be reassigned (i.e. like an int value is incremented or decremented in a "for loop") during the execution of the code block, but may also depend on more complex operations and/or access of external data. Here are two examples:\par
+\par
+
+\pard\li720\ri720\highlight1\f1 int targetValue = 5;\tab\tab\tab\tab\tab\tab\tab\par
+int iterator = 0;\tab\tab\tab\tab\tab\tab\tab\tab\par
+\tab\tab\tab\tab\tab\tab\tab\tab\tab\tab\par
+while (iterator < targetValue) \{\tab\tab\tab\tab\tab\tab\tab\tab\tab\tab\tab\tab\tab\tab\tab\par
+\tab System.out.println("We are not yet at our target      value.");\tab\tab\tab\tab\tab\tab\tab\tab\tab\par
+\tab iterator++;\tab\tab\tab\tab\tab\tab\tab\tab\tab\tab\tab\tab\tab\tab\tab\tab\tab\tab\par
+\}\tab\tab\f0\tab\tab\tab\tab\tab\tab\tab\tab\par
+
+\pard\li720\ri720\highlight0\b\par
+\b0 Notice that--for this particular example--in order for the iterator variable to actually reach the target value, the code block will have to execute the same number of times as we have assigned to the variable "targetValue".\par
+In a "for loop", it would only execute up to \highlight1\f1 targetValue - 1\highlight0\f0  times. This difference in the two looping mechanisms illuminates their use cases: often, a programmer using a "while loop" does so because they are aware of the explicit number of iterations that will occur.\par
+\par
+While loops can also lend themselves to more complex situations. Take the following code as an example (assume that the methods \highlight1\f1 getTemperature()\highlight0\f0  and \highlight1\f1 getHumidity()\highlight0\f0  are declared elsewhere, and access some external data):\par
+\par
+
+\pard\li720\ri720\highlight1\f1 boolean yuckyDay = false;\tab\tab\tab\tab\tab\tab\par
+while (yuckyDay == false) \{\tab\tab\tab\tab\tab\tab\par
+\tab double temp = getTemperature();\tab\tab\tab\tab\par
+\tab double humid = getHumidity();\tab\tab\tab\tab\tab\par
+\tab\tab\tab\tab\tab\tab\tab\tab\tab\tab\par
+\tab boolean hotAndHumid = temp >= 80.0 && humid >= 75.0;\tab\par
+\tab boolean isRaining = humid >= 98.0;\tab\tab\tab\tab\par
+\tab\tab\tab\tab\tab\tab\tab\tab\tab\tab\par
+\tab if (hotAndHumid || isRaining) \{\tab\tab\tab\tab\par
+\tab\tab yuckyDay = true;\tab\tab\tab\tab\tab\tab\par
+\tab\}\tab\tab\tab\tab\tab\tab\tab\tab\tab\par
+\}\tab\tab\tab\tab\tab\tab\tab\tab\tab\tab\f0\par
+
+\pard\li720\ri720\highlight0\b\par
+\b0 I'll forego a lot of explanation and let the code speak for itself, with the exception of pointing out that our test expression and the following code block don't utilize iteration, and will continue to execute until the day is yucky, or forever, if the previously-declared data access methods fail (like just returning the intial value they stored on all subsequent calls, or something like that).\b\par
+
+\pard\par
+4. What is the syntax of another one of the loops in your above answer? How and when should you use this loop? Give an example.\par
+\par
+
+\pard\li720\ri720\b0 The "do-while loop" functions much like the "while loop", with the exception that its test expression comes \i after\i0  its code block. The practical consequence is that the code block always executes at least once before the test expression is evaluated. It looks like this:\par
+\par
+
+\pard\li720\ri720\highlight1\f1 do \{\tab\tab\tab\tab\tab\tab\tab\tab\tab\tab\tab\tab\tab\tab\tab\tab\tab\tab\tab\tab\par
+\tab ...some code;\tab\tab\tab\tab\tab\tab\tab\tab\tab\tab\tab\tab\tab\tab\tab\tab\tab\par
+
+\pard\li720\ri720\} while (test expression);\tab\tab\tab\tab\tab\tab\par
+\par
+\highlight0\f0 It can be useful in situations where we want to continue executing the code block one more time after the test expression evaluates to false, like so:\par
+\par
+
+\pard\li720\ri720\highlight1\f1 boolean yuckyDay = true;\tab\tab\tab\tab\tab\tab\par
+\tab\tab\tab\tab\tab\tab\tab\tab\tab\tab\par
+do \{\tab\tab\tab\tab\tab\tab\tab\tab\tab\tab\par
+\tab double temp = getTemperature();\tab\tab\tab\tab\par
+\tab double humid = getHumidity();\tab\tab\tab\tab\tab\par
+\tab\tab\tab\tab\tab\tab\tab\tab\tab\tab\par
+\tab boolean hotAndHumid = (temp >= 80.0 && humid >= 75.0);\par
+\tab boolean isRaining = (humid >= 98.0);\tab\tab\tab\par
+\tab\tab\tab\tab\tab\tab\tab\tab\tab\tab\par
+\tab if (!(hotAndHumid || isRaining)) \{\tab\tab\tab\tab\par
+\tab\tab yuckyDay = false;\tab\tab\tab\tab\tab\tab\par
+\tab\tab System.out.println("Time to go outside!");\tab\par
+\tab\} else \{\tab\tab\tab\tab\tab\tab\tab\tab\par
+\tab\tab System.out.println("Waiting for a nice day...");\par
+\tab\}\tab\tab\tab\tab\tab\tab\tab\tab\tab\tab\tab\tab\tab\tab\tab\tab\tab\tab\tab\par
+
+\pard\li720\ri720\} while (yuckyDay == true);\tab\tab\tab\tab\tab\tab\par
+\par
+\highlight0\f0 ...here, the programmer wants to display a message to the user (or, in general, execute some kind of code) just once after the test expression has evaluated to false. This kind of situation is a potential use case.\par
+\b\par
+
+\pard 5. What is your favorite thing you learned this week?\par
+\par
+
+\pard\li720\ri720\b0 The brief introduction to reading and working with user input was especially interesting. I'm accustomed to using Javascript to access the DOM, usually getting the value of an HTML <input> element if I need some information from the user. It's cool to see how Java handles this with "System.in" and what the basics of that code might look like. I Definitely need to know more about this for the end goal of building an API.\par
+\par
+Also, I learned that next week's research assignment will be in markdown, because I want syntax highlighting in my code blocks.\b\par
+}
+ 
