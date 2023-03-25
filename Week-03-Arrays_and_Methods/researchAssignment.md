@@ -7,7 +7,9 @@
 
 - *Why would this method be useful (how could you use it)?*
 
-***NOTE: Everything presented here is a synthesis of information from the Javadoc entry on Strings*** (https://docs.oracle.com/en/java/javase/20/docs/api/java.base/java/lang/String.html) ***and my own experience, except where I have explicitly linked other sources.***
+***NOTE: Everything presented here is a synthesis of information from the Javadoc entry on Strings:*** 
+ (https://docs.oracle.com/en/java/javase/20/docs/api/java.base/java/lang/String.html)  
+ ***and my own experience, except where I have explicitly linked other sources.***
 
 ## **1. compareTo()**
 
