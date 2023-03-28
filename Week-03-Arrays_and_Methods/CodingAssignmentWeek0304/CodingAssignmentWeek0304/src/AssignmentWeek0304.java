@@ -1,3 +1,5 @@
+
+
 public class AssignmentWeek0304 {
     public static void main(String[] args) {
                 
@@ -32,9 +34,13 @@ public class AssignmentWeek0304 {
 
         // Use a loop to iterate through the array and calculate the average number of letters per name. Print the result to the console.
         
+        total = 0;
+        
         for (String name: names){
-            System.out.println("The length of the name " + name + " is " + name.length() + ".");
+            total += name.length();
         }
+        
+        System.out.println("The average number of letters for a name in the array 'names' is " + total / names.length + ".");
         
         // Use a loop to iterate through the array again and concatenate all the names together, separated by spaces, and print the result to the console.
         
