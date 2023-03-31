@@ -1,5 +1,4 @@
 
-
 public class AssignmentWeek0304 {
     public static void main(String[] args) {
         
@@ -148,9 +147,7 @@ public class AssignmentWeek0304 {
          System.out.println("What if I wanted to tip 17.5%?");
          printPossibleBillTotals(10.5, 0.175);
          
-         
     }
-        
     
     
     public static String repeatWord(String word, int n) {
