@@ -53,13 +53,15 @@ public class AssignmentWeek0304 {
         
         // Use a loop to iterate through the array again and concatenate all the names together, separated by spaces, and print the result to the console.
         
-        String concatenatedNames = names[0];
-        for (int i = 1; i < names.length; i++) {
-            concatenatedNames += " " + names[i];
+        
+        StringBuilder cn_sb = new StringBuilder();
+        for (int i = 0; i < names.length; i++) {
+            cn_sb.append(names[i]);
+            cn_sb.append(i != names.length - 1 ? " " : "");
         }
         
         lineBreak();
-        System.out.println("Here is a concatenated String of names: " + concatenatedNames);
+        System.out.println("Here is a concatenated String of names: " + cn_sb.toString() + ".");
         
         // How do you access the last element of any array?
         // How do you access the first element of any array?
@@ -140,17 +142,23 @@ public class AssignmentWeek0304 {
          lineBreak();
          testWillBuyDrink(false, 11.0);
          
+         lineBreak();
+         System.out.println("I didn't know I had to tip for that $10.50 smoothie! How much should I tip?");
+         printPossibleBillTotals(10.5);
+         System.out.println("What if I wanted to tip 17.5%?");
+         printPossibleBillTotals(10.5, 0.175);
+         
          
     }
         
     
     
     public static String repeatWord(String word, int n) {
-        String result = "";
+        StringBuilder rw_sb = new StringBuilder();
         for (int i = 0; i < n; i++){
-            result += word;
+            rw_sb.append(word);
         }
-        return result;
+        return rw_sb.toString();
     }
     
     public static void testRepeatWord(String word, int n) {
@@ -219,14 +227,14 @@ public class AssignmentWeek0304 {
         if (isHotOutside){
             System.out.println("It's sweltering.");
             if (boughtDrink) {
-                System.out.println("...Good thing I had enough money to buy that expensive smoothie.");
+                System.out.println("...Good thing $" + String.format("%.2f", moneyInPocket) + " was enough to buy that expensive smoothie.");
             } else {
-                System.out.println("...I wish I had enough money for a drink!");
+                System.out.println("...I wish $" + String.format("%.2f", moneyInPocket) + " was enough money for a drink!");
             }
         } else {
             System.out.println("I'll wait for a hot day to buy an expensive smoothie.");
             if (!willBuyDrink(!isHotOutside, moneyInPocket)) {
-                System.out.println("...I'm gonna have to bring more money than I have in my wallet today, though.");
+                System.out.println("...I'm gonna have to bring more money than $" + String.format("%.2f", moneyInPocket) + ", though.");
             }
         }
     }
@@ -269,6 +277,22 @@ public class AssignmentWeek0304 {
             billTotalsWithTip[i] = billTotal + billTotal * tipPercentages[i];
         }
         return billTotalsWithTip;
+    }
+    
+    public static void printPossibleBillTotals(double billTotal, double customTipPercentage) {
+        double[] billTotalsWithTip = tippingOptions(billTotal, customTipPercentage);
+        System.out.println("For a bill of $" + String.format("%.2f", billTotal) + "," + " the total if you tipped 10%, 15%, 20%, and your custom percentage of " + String.format("%.1f", customTipPercentage * 100) + "%, respectively, would be:");
+        for (double tot: billTotalsWithTip) {
+            System.out.println("$" + String.format("%.2f", tot));
+        }
+    }
+    
+    public static void printPossibleBillTotals(double billTotal) {
+        double[] billTotalsWithTip = tippingOptions(billTotal);
+        System.out.println("For a bill of $" + String.format("%.2f", billTotal) + "," + " the total if you tipped 10%, 15%, and 20%, respectively, would be:");
+        for (double tot: billTotalsWithTip) {
+            System.out.println("$" + String.format("%.2f", tot));
+        }
     }
     
     public static void lineBreak(){
