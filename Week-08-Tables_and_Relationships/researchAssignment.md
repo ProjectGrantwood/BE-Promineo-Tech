@@ -14,9 +14,14 @@ In addition to the **Data Definition Language *(DDL)*** subset of SQL, there are
   ```SQL
   DELETE FROM table_name WHERE condition;
   
-  INSERT INTO table_name (column_name_1, column_name_2, ...column_name_n) VALUES (column_value_1, column_value_2, ...column_value_n);
+  INSERT INTO table_name (column_name_1, column_name_2, 
+  ...column_name_n) VALUES (column_value_1, column_value_2, 
+  ...column_value_n);
   
-  -- Note that the following example would almost always be followed by a ...WHERE condition... construct to specify which rows are updated, unless one wants to set that column to a single value for all existing rows.--
+  /*Note that the following example would almost always be 
+  followed by a ...WHERE condition... construct to specify 
+  which rows are updated, unless one wants to set that 
+  column to a single value for all existing rows.*/
   
   UPDATE table_name SET column_name = new_value;
   ```
@@ -26,7 +31,8 @@ In addition to the **Data Definition Language *(DDL)*** subset of SQL, there are
     ```SQL
     SELECT column_name FROM table_name WHERE condition;
     
-    --or, to select all fields from an entry that matches the condition...--
+    /*or, to select all fields from an entry that matches 
+    the condition...*/
     
     SELECT * FROM table_name WHERE condition
     ```
@@ -34,29 +40,35 @@ In addition to the **Data Definition Language *(DDL)*** subset of SQL, there are
 - **DCL** is the subset of SQL dealing with controlling user access, usually through explicitly identifying which privileges a user can access, and from which host. It includes constructs such as ```GRANT``` and ```REVOKE```, as well as ```CREATE USER``` and ```CREATE ROLE```. While SQL is largely treated the same by different implementations (like Microsoft SQL, MySQL, Oracle, etc...), it can especially differ in its **DCL** subset. The following example are quite specific to MySQL.
 
     ```SQL
-    --Create roles. These act as "groups" of privileges--
+    --Create roles. These act as "groups" of privileges
     CREATE ROLE 'role_admin', 'role_view';
     
-    --Create some users. NOTE: The same username followed by a different host would be creating different users than the ones below. Additionally, the example passwords suck as passwords--
+    /*Create some users. NOTE: The same username followed
+    by a different host would be creating different users
+    than the ones below.
+    Additionally, the example passwords suck as passwords*/
     CREATE USER 'user_viewer'@'host_name' IDENTIFIED BY 'view';
     CREATE USER 'user_admin'@'host_name' IDENTIFIED BY 'admin';
     
     
-    --Grant privileges to the different roles for all tables in a schema--
+    /*Grant privileges to the different roles for
+    all tables in a schema*/
     GRANT SELECT ON schema_name.* to 'role_view';
     GRANT ALL ON schema_name.* to 'role_admin';
     
-    --Grant different roles to different users--
+    --Grant different roles to different users
     GRANT 'role_view' TO 'user_viewer'@'host_name';
     GRANT 'role_admin' TO 'user_admin'@'host_name';
     
-    --Oops, we hired an evil hacker admin. Remove their admin role--
+    --Oops, we hired an evil hacker admin. 
+    --Remove their admin role
     REVOKE 'role_admin' FROM 'user_admin'@'host_name';
     
-    --and just in case--
+    --and just in case
     ALTER USER 'user_admin'@'host_name' ACCOUNT LOCK;
     
-    --Now get your security guy and your boss on the phone, stat!--
+    --Now get your security guy and your boss 
+    --on the phone, stat!
     
     ```
 
@@ -84,13 +96,16 @@ My favorite thing I learned this week was the ```JOIN``` and ```GROUP BY``` cons
 
 ```SQL
 
-SELECT Employees.FirstName, Employees.LastName, Employees.EmployeeID, SUM(OrderDetails.Quantity * Products.Price) FROM OrderDetails
+SELECT Employees.FirstName, Employees.LastName, Employees.EmployeeID, 
+SUM(OrderDetails.Quantity * Products.Price) FROM OrderDetails
 JOIN Orders ON OrderDetails.OrderID = Orders.OrderID
 JOIN Products ON OrderDetails.ProductID = Products.ProductID
 JOIN Employees ON Orders.EmployeeID = Employees.EmployeeID
 GROUP BY Employees.EmployeeID;
 
---returns the total dollar amount in sales each employee made across all their orders. From there you could probably get their average dollar amount per order, etc...--
+/*returns the total dollar amount in sales each employee made 
+across all their orders. From there you could probably get 
+their average dollar amount per order, etc...*/
 
 ```
 
